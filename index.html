@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>C2C E-commerce Platform - Home</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to Goods2Buy</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+            <a href="products.html">View Products</a>
+            <span id="dashboardLink"></span>
+            <span id="logoutLink"></span>
+        </nav>
+    </header>
+
+    <main>
+        <p>This is a mock platform that simulates an e-commerce website.
+            This website displays products added by users and allows other users to purchase these products.</p>
+    </main>
+
+    <script>
+        if (sessionStorage.getItem('loggedInUser')) {
+            document.getElementById('dashboardLink').innerHTML = '<a href="dashboard.php">My Dashboard</a>';
+            document.getElementById('logoutLink').innerHTML = '<a href="logout.php">Logout</a>';
+        }
+    </script>
+
+    <div style="text-align: center; margin: 30px 0;">
+        <a href="register.html" style="display: inline-block; background-color: #007bff; color: white; 
+            padding: 15px 30px; font-size: 24px; border-radius: 8px; text-decoration: none;">
+            Register Now
+        </a>
+        <a href="login.html" class="btn" style="display: inline-block; background-color: #007bff; color: white; 
+            padding: 15px 30px; font-size: 24px; border-radius: 8px; text-decoration: none;">
+            Login
+        </a>
+    </div>
+</body>
+
+</html>

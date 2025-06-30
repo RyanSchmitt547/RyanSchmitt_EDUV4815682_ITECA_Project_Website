@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Available Products - C2C Platform</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <h2>Available Products</h2>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+            <span id="dashboardLink"></span>
+            <span id="logoutLink"></span>
+        </nav>
+    </header>
+
+    <main>
+        <table id="productsTable">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price (ZAR)</th>
+                    <th>Quantity</th>
+                    <th>Seller</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        if (sessionStorage.getItem('loggedInUser')) {
+            document.getElementById('dashboardLink').innerHTML = '<a href="dashboard.php">My Dashboard</a>';
+            document.getElementById('logoutLink').innerHTML = '<a href="logout.php">Logout</a>';
+        }
+
+        fetch('get_products.php')
+            .then(response => response.json())
+            .then(products => {
+                const tbody = document.querySelector('#productsTable tbody');
+                products.forEach(product => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>
+                            ${product.image
+                            ? `<img src="${product.image}" alt="Product Image" style="max-width:100px; max-height:80px;">`
+                            : 'No image'}
+                        </td>
+                        <td>${product.name}</td>
+                        <td>${product.description}</td>
+                        <td>R ${parseFloat(product.price).toFixed(2)}</td>
+                        <td>${product.quantity}</td>
+                        <td>${product.username}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            })
+            .catch(err => console.error('Error fetching products:', err));
+    </script>
+</body>
+
+</html>
